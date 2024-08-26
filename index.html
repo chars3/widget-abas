@@ -1,0 +1,521 @@
+<style>
+  * {
+    font-family: sans-serif;
+  }
+
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .has-border {
+    border-left: 1px solid blue;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .carrossel-solutions {
+    padding-top: 100px;
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+  }
+
+  /* ---Tabs--- */
+  .c-tabs {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+  }
+
+  .c-images-container {
+    width: 800px;
+  }
+
+  .c-images {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .c-tab {
+    display: flex;
+    /* flex-direction: column; */
+    /* justify-content: center; */
+    /* padding: 10px 30px; */
+    gap: 5px;
+
+    width: 30.75rem;
+    min-height: 70px;
+    /* background-color: rgb(255, 255, 255, 0.4); */
+    cursor: pointer;
+    transition: transform 0.4s ease, scale 0.4s ease;
+  }
+
+  .c-tab-active {
+    transform: scale(1.02);
+  }
+
+  .c-tab-border {
+    width: 42px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .c-tab-border img {
+    padding: 0 10px 10px 10px;
+    display: none;
+    height: 40px;
+  }
+
+  .c-tab-icon {
+    padding: 0 10px 10px 10px;
+    display: none;
+    width: 40px;
+    height: 40px;
+  }
+
+  /* /tabs/borda com icone */
+  .c-line-selected {
+    width: 2px;
+    height: 90%;
+    background-color: blue;
+    border-radius: 5px;
+  }
+
+  .c-tab-content {
+    display: flex;
+    /* margin-top: 10px; */
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    /* padding: 10px 0 0px 0; */
+    position: relative;
+    width: 100%;
+    transition: transform 0.4s ease, scale 0.4s ease;
+  }
+
+  .c-tab-content-active {
+    transform: translateY(-10px);
+    padding-top: 10px;
+
+    /* Aumenta ligeiramente o tamanho do conteúdo da aba */
+  }
+
+  .active {
+    max-height: 1000px;
+  }
+
+  .c-tab-title h3 {
+    font-weight: bold;
+    font-size: 1.25rem;
+    margin-top: 2px;
+  }
+
+  .c-tab-list {
+    padding-inline-start: 20px;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 40px;
+    line-height: 1.75rem;
+    font-size: 1rem;
+  }
+
+  .c-tab-list-container {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 2.6s ease-out;
+  }
+
+  .c-tab-list-container.active {
+    max-height: 1000px;
+  }
+
+  .c-tab-btn {
+    position: absolute;
+    bottom: -10px;
+    right: 0;
+    text-decoration: none;
+    color: blue;
+  }
+
+  .c-tab-btn span:hover {
+    color: blue;
+  }
+
+  /* ---Imagens--- */
+  .blurred {
+    filter: blur(2px);
+  }
+
+  .c-img {
+    position: absolute;
+    height: auto;
+    width: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+
+    box-shadow: 0px 4px 18px 0px rgba(34, 54, 77, 0.25);
+    transition: top 0.5s ease, left 0.5s ease, z-index 0s;
+  }
+
+  .c-img img {
+    height: 100%;
+    width: 100%;
+
+    overflow: hidden;
+  }
+
+  .discador-img {
+    z-index: 50;
+  }
+
+  .omnichannel-img {
+    z-index: 40;
+    top: 30px;
+    left: 30px;
+  }
+
+  .receptivo-img {
+    z-index: 30;
+    top: 60px;
+    left: 60px;
+  }
+
+  .crm-img {
+    z-index: 20;
+    top: 90px;
+    left: 90px;
+  }
+
+  @media (max-width: 1219px) {
+    .carrossel-solutions {
+      padding-top: 10px;
+      flex-direction: column-reverse;
+      /*flex-direction: column;*/
+    }
+
+    .c-tabs {
+      width: 90%;
+      max-width: 600px;
+      height: auto;
+      margin: 0 auto;
+      margin-top: 10px;
+    }
+
+    .c-tab {
+      width: auto;
+    }
+
+    .c-images-container {
+      width: 90%;
+      max-width: 600px;
+      min-height: 360px;
+      /* Ajuste conforme necessário para a altura mínima desejada */
+      height: auto;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .c-tabs {
+      margin-top: 40px;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .c-tabs {
+      margin-top: 10px;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .c-tabs {
+      margin-top: 40px;
+    }
+  }
+</style>
+
+<div class="carrossel-solutions">
+  <div class="c-images-container">
+    <div class="c-images">
+      <div class="c-img discador-img" data-index="1">
+        <img
+          src="https://3cplusnow.com/wp-content/uploads/2024/01/discador.png"
+          alt=""
+        />
+      </div>
+      <div class="c-img omnichannel-img blurred" data-index="2">
+        <img
+          src="https://3cplusnow.com/wp-content/uploads/2024/01/omnichannel.png"
+          alt=""
+        />
+      </div>
+      <div class="c-img receptivo-img blurred" data-index="3">
+        <img
+          src="https://3cplusnow.com/wp-content/uploads/2024/01/receptivo.png"
+          alt=""
+        />
+      </div>
+      <!--<div class="c-img crm-img blurred" data-index="4"><img src="https://3cplusnow.com/wp-content/uploads/2024/01/crm.png" alt=""></div>-->
+    </div>
+  </div>
+  <div class="c-tabs">
+    <div class="c-tab discador-tab" data-img="discador-img">
+      <div class="c-tab-border">
+        <img
+          class="c-tab-icon"
+          src="https://3cplusnow.com/wp-content/uploads/2024/01/phone-volume.svg"
+          alt=""
+        />
+        <div class="c-line-selected"></div>
+      </div>
+      <div class="c-tab-content">
+        <div class="c-tab-title">
+          <h3>Discador Automático</h3>
+        </div>
+        <div class="c-tab-subtitle">
+          Tenha, em nuvem, uma solução para potencializar suas ligações.
+        </div>
+        <div class="c-tab-list-container">
+          <ul class="c-tab-list">
+            <li class="c-tab-list-item">
+              Descarte automático de chamadas improdutivas;
+            </li>
+            <li class="c-tab-list-item">
+              Qualificação e gravação de chamadas;
+            </li>
+            <li class="c-tab-list-item">Modo spy com 3 opções diferentes.</li>
+            <a class="c-tab-btn" href="https://3cplusnow.com/discador/">
+              <span>Saiba mais</span>
+              <img
+                src="https://3cplusnow.com/wp-content/uploads/2024/03/arrow-right-3.svg"
+                width="15px"
+              />
+            </a>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-tab omnichannel-tab" data-img="omnichannel-img">
+      <div class="c-tab-border">
+        <img
+          class="c-tab-icon"
+          src="https://3cplusnow.com/wp-content/uploads/2024/01/omnichannel-icon.svg"
+          alt=""
+        />
+        <div class="c-line-selected"></div>
+      </div>
+      <div class="c-tab-content">
+        <div class="c-tab-title">
+          <h3>Omnichannel</h3>
+        </div>
+        <div class="c-tab-subtitle">
+          Otimize a troca de mensagens com seus clientes na plataforma de
+          conversas mais usada no mundo
+        </div>
+        <div class="c-tab-list-container">
+          <ul class="c-tab-list">
+            <li class="c-tab-list-item">
+              Todas as mensagens em uma única tela;
+            </li>
+            <li class="c-tab-list-item">
+              Vários atendentes em um único número;
+            </li>
+            <li class="c-tab-list-item">
+              Apoio de IA para aprimorar as mensagens.
+            </li>
+            <a class="c-tab-btn" href="https://3cplusnow.com/omnichannel/">
+              <span>Saiba mais</span>
+              <img
+                src="https://3cplusnow.com/wp-content/uploads/2024/03/arrow-right-3.svg"
+                width="15px"
+              />
+            </a>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="c-tab receptivo-tab" data-img="receptivo-img">
+      <div class="c-tab-border">
+        <img
+          class="c-tab-icon"
+          src="https://3cplusnow.com/wp-content/uploads/2024/01/receptivo-icon.svg"
+          alt=""
+        />
+        <div class="c-line-selected"></div>
+      </div>
+      <div class="c-tab-content">
+        <div class="c-tab-title">
+          <h3>Receptivo</h3>
+        </div>
+        <div class="c-tab-subtitle">
+          Gerencie suas chamadas recebidas de forma eficaz
+        </div>
+        <div class="c-tab-list-container">
+          <ul class="c-tab-list">
+            <li class="c-tab-list-item">
+              Priorize as chamadas por filas de atendimento;
+            </li>
+            <li class="c-tab-list-item">
+              Personalize um áudio para chamadas em espera;
+            </li>
+            <li class="c-tab-list-item">
+              Transfira ligações entre diferentes filas ou operadores.
+            </li>
+            <a class="c-tab-btn" href="https://3cplusnow.com/receptivo/">
+              <span>Saiba mais</span>
+              <img
+                src="https://3cplusnow.com/wp-content/uploads/2024/03/arrow-right-3.svg"
+                width="15px"
+              />
+            </a>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!--<div class="c-tab crm-tab" data-img="crm-img">-->
+    <!--    <div class="c-tab-border">-->
+    <!--        <img class="c-tab-icon" src="https://3cplusnow.com/wp-content/uploads/2024/01/crm-icon.svg" alt="">-->
+    <!--        <div class="c-line-selected"></div>-->
+    <!--    </div>-->
+    <!--    <div class="c-tab-content">-->
+    <!--        <div class="c-tab-title">CRM</div>-->
+    <!--        <div class="c-tab-subtitle">Acompanhe todas as etapas dos seus negócios.</div>-->
+    <!--        <ul class="c-tab-list">-->
+    <!--            <li class="c-tab-list-item">Armazene automaticamente o histórico de atividades;-->
+    <!--            </li>-->
+    <!--            <li class="c-tab-list-item">Organize seus produtos em diferentes funis de venda;</li>-->
+    <!--            <li class="c-tab-list-item">Integração do CRM com o omnichannel e discador automático. </li>-->
+    <!--            <a class="c-tab-btn" href="">-->
+    <!--                <span>Saiba mais</span>-->
+    <!--                &#10142;-->
+    <!--            </a>-->
+    <!--        </ul>-->
+    <!--    </div>-->
+    <!--</div>-->
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    let tabs = document.querySelectorAll(".c-tab");
+    let images = document.querySelectorAll(".c-img");
+    let tabLists = document.querySelectorAll(".c-tab-list");
+    let tabContents = document.querySelectorAll(".c-tab-content");
+    let currentTab = -1;
+    let autoSlideInterval;
+
+    function adjustMinHeightForImagesContainer() {
+      let imagesContainer = document.querySelector(".c-images-container");
+
+      let aspectRatio = 4 / 3;
+
+      let containerWidth = imagesContainer.offsetWidth;
+
+      let minHeight = containerWidth / aspectRatio;
+
+      imagesContainer.style.minHeight = minHeight + "px";
+    }
+
+    adjustMinHeightForImagesContainer();
+
+    window.addEventListener("resize", adjustMinHeightForImagesContainer);
+
+    function adjustImagesForTab(activeIndex) {
+      images.forEach((img, idx) => {
+        const imgIndex = parseInt(img.getAttribute("data-index"), 10) - 1;
+        if (imgIndex === activeIndex) {
+          img.style.zIndex = 50;
+          img.style.top = "0px";
+          img.style.left = "0px";
+          img.classList.remove("blurred");
+        } else {
+          let indexDifference = imgIndex - activeIndex;
+          if (indexDifference < 0) {
+            indexDifference += images.length;
+          }
+          img.style.zIndex = 50 - indexDifference;
+          img.style.top = `${30 * indexDifference}px`;
+          img.style.left = `${30 * indexDifference}px`;
+          img.classList.add("blurred");
+        }
+      });
+    }
+
+    function setActiveTab(index) {
+      tabLists.forEach((list) => {
+        list.classList.add("hidden");
+        list.parentElement.parentElement.parentElement.querySelector(
+          ".c-tab-icon"
+        ).style.display = "none";
+      });
+
+      tabContents.forEach((content) => {
+        content
+          .querySelector(".c-tab-list-container")
+          .classList.remove("active");
+      });
+
+      // tabContents.forEach(content => {
+      //     content.classList.remove('c-tab-content-active');
+      //     // content.querySelector('.c-tab-list-container')
+      // });
+
+      // let activeTabContent = tabContents[index];
+      // activeTabContent.classList.add('active');
+      // console.log(activeTabContent)
+
+      let activeTabListContainer = tabContents[index].querySelector(
+        ".c-tab-list-container"
+      );
+      activeTabListContainer.classList.add("active");
+
+      let activeTabList = tabs[index].querySelector(".c-tab-list");
+      let tabIcon = tabs[index].querySelector(".c-tab-icon");
+
+      if (activeTabList) {
+        activeTabList.classList.remove("hidden");
+        tabIcon.style.display = "block";
+      }
+
+      tabs.forEach((tab) => {
+        tab.querySelector(".c-line-selected").style.background = "#E1E9F4";
+        tab.style.color = "gray";
+      });
+
+      tabs[index].querySelector(".c-line-selected").style.background = "blue";
+      tabs[index].style.color = "#1B1B2B";
+
+      adjustImagesForTab(index);
+    }
+
+    nextSlide();
+
+    function nextSlide() {
+      currentTab = (currentTab + 1) % tabs.length;
+      setActiveTab(currentTab);
+    }
+
+    function startAutoSlide() {
+      autoSlideInterval = setInterval(nextSlide, 4000);
+    }
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener("click", () => {
+        clearInterval(autoSlideInterval);
+        setActiveTab(index);
+      });
+    });
+
+    startAutoSlide();
+  });
+</script>
